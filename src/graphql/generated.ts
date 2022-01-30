@@ -174,6 +174,7 @@ export type Query = {
   category?: Maybe<Category>;
   categories: Array<Category>;
   app?: Maybe<App>;
+  release?: Maybe<Release>;
 };
 
 export type QuerypersonArgs = {
@@ -185,6 +186,10 @@ export type QuerycategoryArgs = {
 };
 
 export type QueryappArgs = {
+  id: Scalars['Int'];
+};
+
+export type QueryreleaseArgs = {
   id: Scalars['Int'];
 };
 
@@ -200,6 +205,7 @@ export type App = {
   authors: Array<Person>;
   maintainers: Array<Person>;
   categories: Array<Category>;
+  releases: Array<Release>;
   createdAt: Scalars['BigInt'];
   updatedAt: Scalars['BigInt'];
 };
@@ -221,6 +227,19 @@ export type Person = {
   email?: Maybe<Scalars['String']>;
   webUrl?: Maybe<Scalars['String']>;
   apps: Array<App>;
+  createdAt: Scalars['BigInt'];
+  updatedAt: Scalars['BigInt'];
+};
+
+export type Release = {
+  __typename?: 'Release';
+  id: Scalars['Int'];
+  appId: Scalars['Int'];
+  version: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  downloadUrl: Scalars['String'];
+  webUrl?: Maybe<Scalars['String']>;
+  app: App;
   createdAt: Scalars['BigInt'];
   updatedAt: Scalars['BigInt'];
 };
@@ -371,6 +390,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Category: ResolverTypeWrapper<Category>;
   Person: ResolverTypeWrapper<Person>;
+  Release: ResolverTypeWrapper<Release>;
   User: ResolverTypeWrapper<User>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
@@ -436,6 +456,7 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   Category: Category;
   Person: Person;
+  Release: Release;
   User: User;
   Boolean: Scalars['Boolean'];
 };
@@ -708,6 +729,12 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryappArgs, 'id'>
   >;
+  release?: Resolver<
+    Maybe<ResolversTypes['Release']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryreleaseArgs, 'id'>
+  >;
 };
 
 export type AppResolvers<
@@ -724,6 +751,7 @@ export type AppResolvers<
   authors?: Resolver<Array<ResolversTypes['Person']>, ParentType, ContextType>;
   maintainers?: Resolver<Array<ResolversTypes['Person']>, ParentType, ContextType>;
   categories?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
+  releases?: Resolver<Array<ResolversTypes['Release']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -751,6 +779,22 @@ export type PersonResolvers<
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   webUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   apps?: Resolver<Array<ResolversTypes['App']>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ReleaseResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['Release'] = ResolversParentTypes['Release']
+> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  appId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  version?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  downloadUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  webUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  app?: Resolver<ResolversTypes['App'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -827,6 +871,7 @@ export type Resolvers<ContextType = MercuriusContext> = {
   App?: AppResolvers<ContextType>;
   Category?: CategoryResolvers<ContextType>;
   Person?: PersonResolvers<ContextType>;
+  Release?: ReleaseResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
 
@@ -861,6 +906,7 @@ export interface Loaders<
     authors?: LoaderResolver<Array<Person>, App, {}, TContext>;
     maintainers?: LoaderResolver<Array<Person>, App, {}, TContext>;
     categories?: LoaderResolver<Array<Category>, App, {}, TContext>;
+    releases?: LoaderResolver<Array<Release>, App, {}, TContext>;
     createdAt?: LoaderResolver<Scalars['BigInt'], App, {}, TContext>;
     updatedAt?: LoaderResolver<Scalars['BigInt'], App, {}, TContext>;
   };
@@ -882,6 +928,18 @@ export interface Loaders<
     apps?: LoaderResolver<Array<App>, Person, {}, TContext>;
     createdAt?: LoaderResolver<Scalars['BigInt'], Person, {}, TContext>;
     updatedAt?: LoaderResolver<Scalars['BigInt'], Person, {}, TContext>;
+  };
+
+  Release?: {
+    id?: LoaderResolver<Scalars['Int'], Release, {}, TContext>;
+    appId?: LoaderResolver<Scalars['Int'], Release, {}, TContext>;
+    version?: LoaderResolver<Scalars['String'], Release, {}, TContext>;
+    description?: LoaderResolver<Maybe<Scalars['String']>, Release, {}, TContext>;
+    downloadUrl?: LoaderResolver<Scalars['String'], Release, {}, TContext>;
+    webUrl?: LoaderResolver<Maybe<Scalars['String']>, Release, {}, TContext>;
+    app?: LoaderResolver<App, Release, {}, TContext>;
+    createdAt?: LoaderResolver<Scalars['BigInt'], Release, {}, TContext>;
+    updatedAt?: LoaderResolver<Scalars['BigInt'], Release, {}, TContext>;
   };
 
   User?: {

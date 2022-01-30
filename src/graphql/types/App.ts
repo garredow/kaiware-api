@@ -12,6 +12,7 @@ export const App = gql`
     authors: [Person!]!
     maintainers: [Person!]!
     categories: [Category!]!
+    releases: [Release!]!
     createdAt: BigInt!
     updatedAt: BigInt!
   }

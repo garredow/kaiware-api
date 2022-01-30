@@ -1,5 +1,5 @@
 import { Database } from '../database/db';
-import { App, Category, Person, User } from '../models';
+import { App, Category, Person, Release, User } from '../models';
 
 export class Data {
   db: Database;
@@ -64,6 +64,16 @@ export class Data {
         .getAllByAppId(appId)
         .then((res) => res.map((a) => a.personId));
       return this.db.person.getByIds(personIds);
+    },
+  };
+
+  release = {
+    getById: (id: number): Promise<Release | undefined> => {
+      return this.db.release.getById(id);
+    },
+
+    getByAppId: (appId: number): Promise<Release[]> => {
+      return this.db.release.getByAppId(appId);
     },
   };
 }

@@ -20,6 +20,9 @@ export const resolvers: IResolvers = {
     app(root, { id }, { dataClient }, info) {
       return dataClient.app.getById(id);
     },
+    release(root, { id }, { dataClient }, info) {
+      return dataClient.release.getById(id);
+    },
   },
   Category: {
     apps(category, args, { dataClient }, info) {
@@ -35,6 +38,9 @@ export const resolvers: IResolvers = {
     },
     categories(app, args, { dataClient }, info) {
       return dataClient.category.getByAppId(app.id);
+    },
+    releases(app, args, { dataClient }, info) {
+      return dataClient.release.getByAppId(app.id);
     },
   },
   Person: {

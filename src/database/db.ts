@@ -9,6 +9,7 @@ import {
   AppMaintainerMap,
   Category,
   Person,
+  Release,
   User,
 } from '../models';
 import {
@@ -18,6 +19,7 @@ import {
   DbAppMaintainerMap,
   DbCategory,
   DbPerson,
+  DbRelease,
   DbUser,
 } from './models';
 
@@ -34,6 +36,7 @@ enum Table {
   Maintainer = 'maintainer',
   Person = 'person',
   User = 'user',
+  Release = 'release',
 }
 
 export class Database {
@@ -204,6 +207,27 @@ export class Database {
       const result = await this.user.getById(user.id);
 
       return toCamelCase<User>(result);
+    },
+  };
+
+  // Release
+
+  release = {
+    getById: (id: number): Promise<Release | undefined> => {
+      return this.db<DbRelease>(Table.Release)
+        .where({ id })
+        .first()
+        .then((res) => (res ? toCamelCase(res) : res));
+    },
+    getByIds: (ids: number[]): Promise<Release[]> => {
+      return this.db<DbRelease>(Table.Release)
+        .whereIn('id', ids)
+        .then((res) => res.map((a) => toCamelCase(a)));
+    },
+    getByAppId: (appId: number): Promise<Release[]> => {
+      return this.db<DbRelease>(Table.Release)
+        .where({ app_id: appId })
+        .then((res) => res.map((a) => toCamelCase<Release>(a)));
     },
   };
 }

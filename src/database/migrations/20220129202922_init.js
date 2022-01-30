@@ -138,6 +138,25 @@ exports.up = async function (knex) {
         .then(() => knex.raw(autoUpdate('app_category_map')));
     })
     .catch((err) => console.error(`Failed to create ${'app_category_map'}`, err?.message));
+
+  await knex.schema
+    .hasTable('release')
+    .then((exists) => {
+      if (exists) return;
+      return knex.schema
+        .createTable('release', (table) => {
+          table.bigInteger('id').unique().index().primary();
+          table.integer('app_id').index();
+          table.string('version');
+          table.text('description');
+          table.string('download_url');
+          table.string('web_url');
+          table.bigInteger('created_at').defaultTo(new Date().valueOf());
+          table.bigInteger('updated_at').defaultTo(new Date().valueOf());
+        })
+        .then(() => knex.raw(autoUpdate('release')));
+    })
+    .catch((err) => console.error(`Failed to create ${'release'}`, err?.message));
 };
 
 /**

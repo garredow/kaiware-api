@@ -62,3 +62,14 @@ export type DbAppCategoryMap = {
   created_at: number;
   updated_at: number;
 };
+
+export type DbRelease = {
+  id: number;
+  app_id: number;
+  version: string;
+  description?: string;
+  download_url: string;
+  web_url?: string;
+  created_at: number;
+  updated_at: number;
+};
