@@ -30,9 +30,6 @@ export type Config = {
     password: string;
     database: string;
   };
-  caching: {
-    dataStaleMs: number;
-  };
 };
 
 function createConfig() {
@@ -52,9 +49,6 @@ function createConfig() {
       user: process.env.DB_USER!,
       password: process.env.DB_PASSWORD!,
       database: process.env.DB_DATABASE!,
-    },
-    caching: {
-      dataStaleMs: Number(process.env.DATA_STALE_MS),
     },
   };
 
@@ -76,9 +70,6 @@ function createConfig() {
       user: Joi.string().required(),
       password: Joi.string().required(),
       database: Joi.string().required(),
-    },
-    caching: {
-      dataStaleMs: Joi.number().required(),
     },
   });
   const { error } = schema.validate(config, { abortEarly: false });
