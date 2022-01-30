@@ -42,6 +42,10 @@ export class Data {
       return this.db.person.getById(id);
     },
 
+    getAll: (): Promise<Person[]> => {
+      return this.db.person.getAll();
+    },
+
     getAuthorsByAppId: async (appId: number): Promise<Person[]> => {
       const personIds = await this.db.appAuthorMap
         .getAllByAppId(appId)

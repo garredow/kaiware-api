@@ -4,6 +4,7 @@ export const Query = gql`
   type Query {
     user: User!
     person(id: Int!): Person
+    people: [Person!]!
     category(id: Int!): Category
     app(id: Int!): App
   }

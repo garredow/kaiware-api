@@ -11,6 +11,9 @@ export const resolvers: IResolvers = {
     person(root, { id }, { dataClient }, info) {
       return dataClient.person.getById(id);
     },
+    people(root, args, { dataClient }, info) {
+      return dataClient.person.getAll();
+    },
     app(root, { id }, { dataClient }, info) {
       return dataClient.app.getById(id);
     },

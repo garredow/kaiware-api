@@ -174,6 +174,9 @@ export class Database {
         .whereIn('id', ids)
         .then((res) => res.map((a) => toCamelCase(a)));
     },
+    getAll: (): Promise<Person[]> => {
+      return this.db<DbPerson>(Table.Person).then((res) => res.map((a) => toCamelCase(a)));
+    },
     // getAuthors
   };
 
