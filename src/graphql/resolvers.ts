@@ -8,6 +8,9 @@ export const resolvers: IResolvers = {
     category(root, { id }, { dataClient }, info) {
       return dataClient.category.getById(id);
     },
+    categories(root, args, { dataClient }, info) {
+      return dataClient.category.getAll();
+    },
     person(root, { id }, { dataClient }, info) {
       return dataClient.person.getById(id);
     },

@@ -6,6 +6,7 @@ export const Query = gql`
     person(id: Int!): Person
     people: [Person!]!
     category(id: Int!): Category
+    categories: [Category!]!
     app(id: Int!): App
   }
 `;

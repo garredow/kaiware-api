@@ -88,8 +88,6 @@ export class Database {
         })
         .then((res) => res.map((a) => toCamelCase<App>(a)));
 
-      console.log('getByPersonId', res);
-
       return res;
     },
   };

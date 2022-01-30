@@ -172,6 +172,7 @@ export type Query = {
   person?: Maybe<Person>;
   people: Array<Person>;
   category?: Maybe<Category>;
+  categories: Array<Category>;
   app?: Maybe<App>;
 };
 
@@ -700,6 +701,7 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QuerycategoryArgs, 'id'>
   >;
+  categories?: Resolver<Array<ResolversTypes['Category']>, ParentType, ContextType>;
   app?: Resolver<
     Maybe<ResolversTypes['App']>,
     ParentType,

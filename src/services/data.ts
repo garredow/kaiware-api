@@ -18,8 +18,13 @@ export class Data {
     getById: (id: number): Promise<Category | undefined> => {
       return this.db.category.getById(id);
     },
+
     getByAppId: (appId: number): Promise<Category[]> => {
       return this.db.category.getByAppId(appId);
+    },
+
+    getAll: (): Promise<Person[]> => {
+      return this.db.category.getAll();
     },
   };
 
