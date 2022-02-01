@@ -24,6 +24,7 @@ export type Config = {
     audience: string;
   };
   database: {
+    appName: string;
     host: string;
     port: number;
     user: string;
@@ -44,6 +45,7 @@ function createConfig() {
       audience: process.env.AUTH0_AUDIENCE!,
     },
     database: {
+      appName: process.env.DB_APP_NAME!,
       host: process.env.DB_HOST!,
       port: Number(process.env.DB_PORT)!,
       user: process.env.DB_USER!,
@@ -65,6 +67,7 @@ function createConfig() {
       audience: Joi.string().required(),
     },
     database: {
+      appName: Joi.string().required(),
       host: Joi.string().required(),
       port: Joi.number().required(),
       user: Joi.string().required(),

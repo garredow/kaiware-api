@@ -46,11 +46,15 @@ export class Database {
     this.db = knex({
       client: 'pg',
       connection: {
+        application_name: config.database.appName,
         host: config.database.host,
         port: config.database.port,
         user: config.database.user,
         password: config.database.password,
         database: config.database.database,
+        ssl: {
+          rejectUnauthorized: false,
+        },
       },
     });
   }
@@ -178,7 +182,6 @@ export class Database {
     getAll: (): Promise<Person[]> => {
       return this.db<DbPerson>(Table.Person).then((res) => res.map((a) => toCamelCase(a)));
     },
-    // getAuthors
   };
 
   // Users
