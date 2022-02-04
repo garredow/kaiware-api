@@ -33,6 +33,7 @@ export type Config = {
     user: string;
     password: string;
     database: string;
+    ssl: boolean;
   };
 };
 
@@ -57,6 +58,7 @@ function createConfig() {
       user: process.env.DB_USER!,
       password: process.env.DB_PASSWORD!,
       database: process.env.DB_DATABASE!,
+      ssl: parseBool(process.env.DB_ENABLE_SSL, false),
     },
   };
 
@@ -82,6 +84,7 @@ function createConfig() {
       user: Joi.string().required(),
       password: Joi.string().required(),
       database: Joi.string().required(),
+      ssl: Joi.bool().required(),
     },
   });
   const { error } = schema.validate(config, { abortEarly: false });

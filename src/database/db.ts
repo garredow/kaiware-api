@@ -52,9 +52,11 @@ export class Database {
         user: config.database.user,
         password: config.database.password,
         database: config.database.database,
-        ssl: {
-          rejectUnauthorized: false,
-        },
+        ssl: config.database.ssl
+          ? {
+              rejectUnauthorized: false,
+            }
+          : false,
       },
     });
   }
@@ -231,6 +233,21 @@ export class Database {
       return this.db<DbRelease>(Table.Release)
         .where({ app_id: appId })
         .then((res) => res.map((a) => toCamelCase<Release>(a)));
+    },
+  };
+
+  // Health
+
+  meta = {
+    testLatency: async () => {
+      try {
+        const before = Date.now();
+        await this.db.raw('SELECT 1');
+        return Date.now() - before;
+      } catch (err: any) {
+        console.error('Failed to connect to the database', err?.message);
+        return 0;
+      }
     },
   };
 }

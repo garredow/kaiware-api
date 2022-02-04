@@ -1,5 +1,6 @@
 import { Database } from '../database/db';
-import { App, Category, Person, Release, User } from '../models';
+import { App, Category, Health, Person, Release, User } from '../models';
+const { version: apiVersion } = require('../../package.json');
 
 export class Data {
   db: Database;
@@ -74,6 +75,17 @@ export class Data {
 
     getByAppId: (appId: number): Promise<Release[]> => {
       return this.db.release.getByAppId(appId);
+    },
+  };
+
+  meta = {
+    health: async (): Promise<Health> => {
+      return {
+        version: apiVersion,
+        uptime: Math.floor(process.uptime() * 1000),
+        date: new Date().toUTCString(),
+        databaseLatency: await this.db.meta.testLatency(),
+      };
     },
   };
 }

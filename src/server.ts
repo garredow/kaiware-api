@@ -7,6 +7,7 @@ import { Database } from './database/db';
 import { resolvers } from './graphql/resolvers';
 import { App } from './graphql/types/App';
 import { Category } from './graphql/types/Category';
+import { Health } from './graphql/types/Health';
 import { Person } from './graphql/types/Person';
 import { Query } from './graphql/types/Query';
 import { Release } from './graphql/types/Release';
@@ -55,7 +56,7 @@ export function configureServer() {
 
   fastify.register(mercurius, {
     schema: makeExecutableSchema({
-      typeDefs: [...scalarTypeDefs, Query, App, Category, Person, Release, User],
+      typeDefs: [...scalarTypeDefs, Query, App, Category, Health, Person, Release, User],
       resolvers: {
         ...scalarResolvers,
         ...resolvers,

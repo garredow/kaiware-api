@@ -175,6 +175,7 @@ export type Query = {
   categories: Array<Category>;
   app?: Maybe<App>;
   release?: Maybe<Release>;
+  health: Health;
 };
 
 export type QuerypersonArgs = {
@@ -218,6 +219,14 @@ export type Category = {
   apps: Array<App>;
   createdAt: Scalars['BigInt'];
   updatedAt: Scalars['BigInt'];
+};
+
+export type Health = {
+  __typename?: 'Health';
+  version: Scalars['String'];
+  uptime: Scalars['BigInt'];
+  date: Scalars['String'];
+  databaseLatency: Scalars['Int'];
 };
 
 export type Person = {
@@ -389,6 +398,7 @@ export type ResolversTypes = {
   App: ResolverTypeWrapper<App>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Category: ResolverTypeWrapper<Category>;
+  Health: ResolverTypeWrapper<Health>;
   Person: ResolverTypeWrapper<Person>;
   Release: ResolverTypeWrapper<Release>;
   User: ResolverTypeWrapper<User>;
@@ -455,6 +465,7 @@ export type ResolversParentTypes = {
   App: App;
   String: Scalars['String'];
   Category: Category;
+  Health: Health;
   Person: Person;
   Release: Release;
   User: User;
@@ -735,6 +746,7 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryreleaseArgs, 'id'>
   >;
+  health?: Resolver<ResolversTypes['Health'], ParentType, ContextType>;
 };
 
 export type AppResolvers<
@@ -767,6 +779,17 @@ export type CategoryResolvers<
   apps?: Resolver<Array<ResolversTypes['App']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HealthResolvers<
+  ContextType = MercuriusContext,
+  ParentType extends ResolversParentTypes['Health'] = ResolversParentTypes['Health']
+> = {
+  version?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uptime?: Resolver<ResolversTypes['BigInt'], ParentType, ContextType>;
+  date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  databaseLatency?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -870,6 +893,7 @@ export type Resolvers<ContextType = MercuriusContext> = {
   Query?: QueryResolvers<ContextType>;
   App?: AppResolvers<ContextType>;
   Category?: CategoryResolvers<ContextType>;
+  Health?: HealthResolvers<ContextType>;
   Person?: PersonResolvers<ContextType>;
   Release?: ReleaseResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
@@ -918,6 +942,13 @@ export interface Loaders<
     apps?: LoaderResolver<Array<App>, Category, {}, TContext>;
     createdAt?: LoaderResolver<Scalars['BigInt'], Category, {}, TContext>;
     updatedAt?: LoaderResolver<Scalars['BigInt'], Category, {}, TContext>;
+  };
+
+  Health?: {
+    version?: LoaderResolver<Scalars['String'], Health, {}, TContext>;
+    uptime?: LoaderResolver<Scalars['BigInt'], Health, {}, TContext>;
+    date?: LoaderResolver<Scalars['String'], Health, {}, TContext>;
+    databaseLatency?: LoaderResolver<Scalars['Int'], Health, {}, TContext>;
   };
 
   Person?: {

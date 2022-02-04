@@ -9,5 +9,6 @@ export const Query = gql`
     categories: [Category!]!
     app(id: Int!): App
     release(id: Int!): Release
+    health: Health!
   }
 `;

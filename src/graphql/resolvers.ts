@@ -23,6 +23,9 @@ export const resolvers: IResolvers = {
     release(root, { id }, { dataClient }, info) {
       return dataClient.release.getById(id);
     },
+    async health(root, args, { dataClient }, info) {
+      return dataClient.meta.health();
+    },
   },
   Category: {
     apps(category, args, { dataClient }, info) {
