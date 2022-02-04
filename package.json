@@ -5,10 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "commit": "cz"
   },
   "author": "Garrett Downs",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/garredow/kaiware-api.git"
+  },
   "dependencies": {
     "arg": "^5.0.1",
     "dotenv": "^14.3.2",
@@ -27,10 +32,21 @@
     "pino": "^7.6.5"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/lodash": "^4.14.178",
     "@types/pg": "^8.6.4",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "prettier": "^2.5.1",
+    "semantic-release": "^19.0.2",
     "typescript": "^4.5.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
