@@ -46,7 +46,7 @@ export class Database {
     this.db = knex({
       client: 'pg',
       connection: {
-        application_name: config.database.appName,
+        application_name: config.meta.appName,
         host: config.database.host,
         port: config.database.port,
         user: config.database.user,

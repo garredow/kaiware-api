@@ -14,6 +14,10 @@ enum LogLevel {
 }
 
 export type Config = {
+  meta: {
+    appName: string;
+    serverPort: number;
+  };
   logger: {
     enabled: boolean;
     level: `${LogLevel}`;
@@ -24,7 +28,6 @@ export type Config = {
     audience: string;
   };
   database: {
-    appName: string;
     host: string;
     port: number;
     user: string;
@@ -35,6 +38,10 @@ export type Config = {
 
 function createConfig() {
   const config: Config = {
+    meta: {
+      appName: process.env.APP_NAME!,
+      serverPort: Number(process.env.SERVER_PORT),
+    },
     logger: {
       enabled: parseBool(process.env.LOGGER_ENABLED, true),
       level: process.env.LOGGER_LEVEL! as any,
@@ -45,7 +52,6 @@ function createConfig() {
       audience: process.env.AUTH0_AUDIENCE!,
     },
     database: {
-      appName: process.env.DB_APP_NAME!,
       host: process.env.DB_HOST!,
       port: Number(process.env.DB_PORT)!,
       user: process.env.DB_USER!,
@@ -55,6 +61,10 @@ function createConfig() {
   };
 
   const schema = Joi.object({
+    meta: {
+      appName: Joi.string().required(),
+      serverPort: Joi.number().required(),
+    },
     logger: {
       enabled: Joi.bool().required(),
       level: Joi.string()
@@ -67,7 +77,6 @@ function createConfig() {
       audience: Joi.string().required(),
     },
     database: {
-      appName: Joi.string().required(),
       host: Joi.string().required(),
       port: Joi.number().required(),
       user: Joi.string().required(),
