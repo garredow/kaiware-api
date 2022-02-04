@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/garredow/kaiware-api/compare/v1.0.1...v1.1.0) (2022-02-04)
+
+
+### Features
+
+* add health check query ([e67757d](https://github.com/garredow/kaiware-api/commit/e67757df862a914de76a6ab30dca0e329ad60947))
+
 ## [1.0.1](https://github.com/garredow/kaiware-api/compare/v1.0.0...v1.0.1) (2022-02-04)
 
 
