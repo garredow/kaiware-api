@@ -7,8 +7,8 @@ if [[ -z "${DOCKER_IMAGE}" ]]; then
     exit 1
 fi
 
-cd ~/apps/kaiware-api
+cd ~/apps/kaiware-store-api
 
-docker-compose down && docker-compose up -d
+docker compose up -d
 
 cd -

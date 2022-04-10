@@ -39,7 +39,7 @@ declare module 'mercurius' {
 
 const logger: LoggerOptions = {
   enabled: config.logger.enabled,
-  name: 'kaiware-api',
+  name: 'kaiware-store-api',
   level: config.logger.level,
   formatters: {
     level: (label: string) => ({ level: label }),

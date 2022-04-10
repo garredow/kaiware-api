@@ -5,7 +5,7 @@ networks:
     external: true
 
 services:
-  kaiware-api:
+  kaiware-store-api:
     image: $DOCKER_IMAGE
     environment:
       APP_NAME: $APP_NAME
@@ -20,10 +20,10 @@ services:
       AUTH0_DOMAIN: $AUTH0_DOMAIN
       AUTH0_AUDIENCE: $AUTH0_AUDIENCE
     labels:
-      - traefik.http.routers.kaiware-api.rule=Host(`${TRAEFIK_HOST}`)
-      - traefik.http.routers.kaiware-api.tls=true
-      - traefik.http.routers.kaiware-api.tls.certresolver=lets-encrypt
+      - traefik.http.routers.kaiware-store-api.rule=Host(`${TRAEFIK_HOST}`)
+      - traefik.http.routers.kaiware-store-api.tls=true
+      - traefik.http.routers.kaiware-store-api.tls.certresolver=lets-encrypt
       - traefik.port=80
-      - traefik.http.services.kaiware-api.loadbalancer.server.port=${SERVER_PORT}
+      - traefik.http.services.kaiware-store-api.loadbalancer.server.port=${SERVER_PORT}
     networks:
       - web
