@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/garredow/kaiware-store-api/compare/v1.1.0...v1.2.0) (2022-04-10)
+
+
+### Features
+
+* rename to kaiware-store-api ([6139185](https://github.com/garredow/kaiware-store-api/commit/61391855634c15aef80792aa1c71248bcd760408))
+
 # [1.1.0](https://github.com/garredow/kaiware-store-api/compare/v1.0.1...v1.1.0) (2022-02-04)
 
 ### Features
